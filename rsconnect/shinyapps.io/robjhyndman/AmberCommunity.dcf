@@ -1,0 +1,13 @@
+name: AmberCommunity
+title: AmberCommunity
+username:
+account: robjhyndman
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7140862
+bundleId: 6345090
+url: https://robjhyndman.shinyapps.io/AmberCommunity/
+when: 1664319731.1779
+lastSyncTime: 1664319731.17795
+asMultiple: FALSE
+asStatic: FALSE
