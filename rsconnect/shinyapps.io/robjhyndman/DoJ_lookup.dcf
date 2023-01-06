@@ -5,9 +5,9 @@ account: robjhyndman
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7141052
-bundleId: 6345116
+bundleId: 6702906
 url: https://robjhyndman.shinyapps.io/DoJ_lookup/
-when: 1664320520.16616
-lastSyncTime: 1664320520.16619
+when: 1672979582.88546
+lastSyncTime: 1672979582.88549
 asMultiple: FALSE
 asStatic: FALSE
