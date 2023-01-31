@@ -1,5 +1,7 @@
-library(tidyverse)
-# File from https://www.matthewproctor.com/australian_postcodes
+library(dplyr)
+library(tibble)
+library(stringr)
+
 # File from https://www.matthewproctor.com/australian_postcodes\
 # Last downloaded 6 January 2023
 pc2lga <- read.csv(file = "data/australian_postcodes.csv") |>
