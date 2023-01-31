@@ -1,5 +1,7 @@
 library(tidyverse)
 # File from https://www.matthewproctor.com/australian_postcodes
+# File from https://www.matthewproctor.com/australian_postcodes\
+# Last downloaded 6 January 2023
 pc2lga <- read.csv(file = "data/australian_postcodes.csv") |>
   as_tibble() |>
   filter(state == "VIC") |>
@@ -17,7 +19,7 @@ lga2doj <- bind_rows(
   ),
   tibble(
     lga = c(
-      "Bass Coast", "Baw Baw", "East Gippsland", "Latrobe City",
+      "Bass Coast", "Baw Baw", "East Gippsland", "Latrobe",
       "South Gippsland", "Wellington"
     ),
     doj = "Gippsland"
@@ -49,7 +51,7 @@ lga2doj <- bind_rows(
   tibble(
     lga = c(
       "Banyule", "Darebin", "Hume", "Melbourne", "Moreland", "Nillumbik",
-      "Whittlesea", "Yarra", "Brimbank", "Hobson's Bay", "Maribyrnong",
+      "Whittlesea", "Yarra", "Brimbank", "Hobsons Bay", "Maribyrnong",
       "Melton", "Moonee Valley", "Wyndham"
     ),
     doj = "North West Metropolitan",
@@ -64,6 +66,24 @@ lga2doj <- bind_rows(
     doj = "South East Metropolitan",
   )
 )
+
+# Fix problems with Baw Baw and Yarra Ranges
+problem_postcodes <- anti_join(pc2lga, lga2doj, by="lga")$postcode
+bawbaw <- c(3816, 3818, 3820:3825, 3831:3833, 3835)
+yarraranges <- c(3116,3138,3139,3140,3158,3159,3160,3765,3766,3767,3770,
+  3775,3777,3779,3785,3786,3787,3788,3789,3791,3792,3793,3795,3796,3797,3799)
+
+pc2lga <- pc2lga |>
+  mutate(
+    lga = case_when(
+      postcode %in% intersect(problem_postcodes, bawbaw) ~ "Baw Baw",
+      postcode %in% intersect(problem_postcodes, yarraranges) ~ "Yarra Ranges",
+      TRUE ~ lga
+    )
+  )
+# Any problems left?
+#anti_join(pc2lga, lga2doj, by="lga")
+
 lookup <- left_join(pc2lga, lga2doj, by="lga") |>
   select(-lga) |>
   mutate(
